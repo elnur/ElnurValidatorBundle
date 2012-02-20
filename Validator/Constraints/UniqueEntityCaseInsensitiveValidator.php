@@ -37,10 +37,15 @@ class UniqueEntityCaseInsensitiveValidator extends ConstraintValidator
         $builder = $repository->createQueryBuilder('x');
 
         foreach ($fields as $field) {
+            if (isset($class->associationMappings[$field])) {
+                $builder->andWhere('x.' . $field . ' = :' . $field);
+            } else {
+                $builder->andWhere(
+                    'lower(x.' . $field. ') = lower(:' . $field . ')'
+                );
+            }
+
             $value = $class->reflFields[$field]->getValue($entity);
-            $builder->andWhere(
-                'lower(x.' . $field. ') = lower(:' . $field . ')'
-            );
             $builder->setParameter($field, $value);
         }
 
