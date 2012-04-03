@@ -37,6 +37,11 @@ class CurrentPasswordValidator extends ConstraintValidator
     public function isValid($currentPassword, Constraint $constraint)
     {
         $currentUser = $this->securityContext->getToken()->getUser();
+
+        if (is_string($currentUser)) {
+            throw new \RuntimeException('The user must be logged in');
+        }
+
         $encoder = $this->encoderFactory->getEncoder($currentUser);
 
         $isValid = $encoder->isPasswordValid(
