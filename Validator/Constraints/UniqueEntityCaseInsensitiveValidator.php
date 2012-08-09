@@ -73,16 +73,7 @@ class UniqueEntityCaseInsensitiveValidator extends ConstraintValidator
         $result = $builder->getQuery()->getResult();
 
         if (count($result) && $result[0] !== $entity) {
-            $oldPath = $this->context->getPropertyPath();
-            $this->context->setPropertyPath(
-                empty($oldPath) ? $fields[0] : $oldPath . '.' . $fields[0]
-            );
-            $this->context->addViolation(
-                $constraint->message,
-                array(),
-                $class->reflFields[$fields[0]]->getValue($entity)
-            );
-            $this->context->setPropertyPath($oldPath);
+            $this->context->addViolationAtSubPath($fields[0], $constraint->message, array($value));
         }
 
         return true;
