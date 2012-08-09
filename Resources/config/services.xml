@@ -35,11 +35,5 @@ THE SOFTWARE.
             <tag name="validator.constraint_validator" alias="elnur.validator.unique_entity_case_insensitive" />
             <argument type="service" id="doctrine"/>
         </service>
-
-        <service id="elnur.validator.current_password" class="%elnur.validator.current_password.class%">
-            <tag name="validator.constraint_validator" alias="elnur.validator.current_password" />
-            <argument type="service" id="security.encoder_factory"/>
-            <argument type="service" id="security.context"/>
-        </service>
     </services>
 </container>
