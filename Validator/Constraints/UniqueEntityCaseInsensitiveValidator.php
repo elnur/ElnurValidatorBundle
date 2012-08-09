@@ -22,9 +22,9 @@
  */
 namespace Elnur\ValidatorBundle\Validator\Constraints;
 
-use Symfony\Component\Validator\Constraint,
-    Symfony\Component\Validator\ConstraintValidator,
-    Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class UniqueEntityCaseInsensitiveValidator extends ConstraintValidator
 {
